@@ -10,7 +10,7 @@ import UIKit
 
 class ToDoViewController: UITableViewController {
     
-    //var isPickerHidden = true
+    var isEndDatePickerHidden = true
     
     var todo: ToDo?
     
@@ -59,33 +59,35 @@ class ToDoViewController: UITableViewController {
         todo = ToDo(title:title, isComplete: isComplete, dueDate: dueDate, notes: notes)
     }
     
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        switch (indexPath) {
-//        case [2,0]:
-//            isPickerHidden = !isPickerHidden
-//
-//            dueDateLabel.textColor = isPickerHidden ? .black : tableView.tintColor
-//
-//            tableView.beginUpdates()
-//            tableView.endUpdates()
-//        default:
-//            break
-//        }
-//    }
-//
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let normalCellHeight = CGFloat(44)
-//        let largeCellHeight = CGFloat(200)
-//
-//        switch(indexPath) {
-//        case [1,0]:
-//            return isPickerHidden ? normalCellHeight : largeCellHeight
-//        case[2,0]:
-//            return largeCellHeight
-//        default:
-//            return normalCellHeight
-//        }
-//    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt
+        indexPath: IndexPath) {
+        switch (indexPath) {
+        case [1,0]:
+            isEndDatePickerHidden = !isEndDatePickerHidden
+            
+            dueDateLabel.textColor =
+                isEndDatePickerHidden ? .black : tableView.tintColor
+            
+            tableView.beginUpdates()
+            tableView.endUpdates()
+            
+        default: break
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let normalCellHeight = CGFloat(44)
+        let largeCellHeight = CGFloat(200)
+
+        switch(indexPath) {
+        case [1,0]:
+            return isPickerHidden ? normalCellHeight : largeCellHeight
+        case[2,0]:
+            return largeCellHeight
+        default:
+            return normalCellHeight
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
