@@ -83,6 +83,7 @@
 				E96B8F1F21B548450002DD65 /* Sources */,
 				E96B8F2021B548450002DD65 /* Frameworks */,
 				E96B8F2121B548450002DD65 /* Resources */,
+				E9526182228DDC76000BBE6B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -105,6 +106,7 @@
 				TargetAttributes = {
 					E96B8F2221B548450002DD65 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -138,6 +140,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E9526182228DDC76000BBE6B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "
+";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E96B8F1F21B548450002DD65 /* Sources */ = {
@@ -303,7 +326,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "thomas-hamburger.ToDoList";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -321,7 +344,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "thomas-hamburger.ToDoList";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

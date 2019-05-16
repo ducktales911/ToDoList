@@ -9,9 +9,9 @@
 import UIKit
 
 class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
-    
+
     var todos = [ToDo]()
-    
+
     func checkmarkTapped(sender: ToDoCell) {
         if let indexPath = tableView.indexPath(for: sender) {
             var todo = todos[indexPath.row]
@@ -21,12 +21,11 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
             ToDo.saveToDos(todos)
         }
     }
-    
-    
+
     @IBAction func unwindToToDoList(segue: UIStoryboardSegue) {
         guard segue.identifier == "saveUnwind" else { return }
         let sourceViewController = segue.source as! ToDoViewController
-        
+
         if let todo = sourceViewController.todo {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 todos[selectedIndexPath.row] = todo
@@ -39,7 +38,7 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
         }
         ToDo.saveToDos(todos)
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetails" {
             let todoViewController = segue.destination as! ToDoViewController
@@ -48,25 +47,17 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
             todoViewController.todo = selectedTodo
         }
     }
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if let savedToDos = ToDo.loadToDos() {
             todos = savedToDos
         } else {
             todos = ToDo.loadSampleToDos()
         }
-        
+
         navigationItem.leftBarButtonItem = editButtonItem
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -80,7 +71,7 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier") as? ToDoCell else {
             fatalError("Could not dequeue a cell")
         }
@@ -90,7 +81,7 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
         cell.isCompleteButton.isSelected = todo.isComplete
         cell.delegate = self
         return cell
-        
+
     }
 
     // Override to support conditional editing of the table view.
@@ -106,30 +97,4 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
             ToDo.saveToDos(todos)
         }
     }
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

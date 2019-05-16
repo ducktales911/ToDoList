@@ -13,16 +13,16 @@ import UIKit
 }
 
 class ToDoCell: UITableViewCell {
-    
+
     var delegate: ToDoCellDelegate?
 
     @IBOutlet weak var isCompleteButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
-    
+
     @IBAction func completeButtonTapped() {
         delegate?.checkmarkTapped(sender: self)
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
