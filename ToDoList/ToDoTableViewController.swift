@@ -8,8 +8,10 @@
 
 import UIKit
 
+// Geeft een collectie van ToDo objecten weer.
 class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
 
+    // Collectie van ToDo items.
     var todos = [ToDo]()
 
     func checkmarkTapped(sender: ToDoCell) {
@@ -22,6 +24,7 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
         }
     }
 
+    // Als een ToDo object aangemaakt is door ToDoViewController, voeg een cel toe aan de tabel die de nieuwe data representeert.
     @IBAction func unwindToToDoList(segue: UIStoryboardSegue) {
         guard segue.identifier == "saveUnwind" else { return }
         let sourceViewController = segue.source as! ToDoViewController
@@ -39,6 +42,7 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
         ToDo.saveToDos(todos)
     }
 
+    // Als een rij wordt geselecteerd, toon de bijbehorende ToDo obect in de ToDo view.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetails" {
             let todoViewController = segue.destination as! ToDoViewController
@@ -62,21 +66,22 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
+    // Er is rij voor elke todo.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todos.count
     }
 
+    // Stelt de cellen van de tableView in.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
+        // Probeert een cel, gedowncast als ToDoCell, te dequeuen. Faalt als dit niet lukt.
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier") as? ToDoCell else {
             fatalError("Could not dequeue a cell")
         }
 
+        // Haal de model uit de array die correspondeert met de weer te geven cel.
         let todo = todos[indexPath.row]
+        // Update de eigenschappen van de cel.
         cell.titleLabel?.text = todo.title
         cell.isCompleteButton.isSelected = todo.isComplete
         cell.delegate = self
@@ -84,12 +89,12 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
 
     }
 
-    // Override to support conditional editing of the table view.
+    // Nodig om swipe-to-delete mogelijk te maken.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    // Override to support editing the table view.
+    // Bij een swipe-to-delete, verwijder het model uit de array en uit de table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             todos.remove(at: indexPath.row)

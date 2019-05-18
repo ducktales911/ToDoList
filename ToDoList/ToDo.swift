@@ -8,12 +8,15 @@
 
 import Foundation
 
+// Model om een enkele todo te representeren.
 struct ToDo: Codable {
+    
     var title: String
     var isComplete: Bool
     var dueDate: Date
     var notes: String?
 
+    // Nodig om een datum om te zetten in een string.
     static let dueDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
@@ -24,6 +27,7 @@ struct ToDo: Codable {
     static let DocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("todos").appendingPathExtension("plist")
 
+    // Verkrijg een array van ToDo items opgeslagen op schijf en return de array als de schijf items bevat.
     static func loadToDos() -> [ToDo]? {
         guard let codedToDos = try? Data(contentsOf: ArchiveURL) else {return nil}
         let propertyListDecoder = PropertyListDecoder()
@@ -36,6 +40,7 @@ struct ToDo: Codable {
         ((try? codedToDos?.write(to: ArchiveURL, options: .noFileProtection)) as ()??)
     }
 
+    // Populeert de een array vn ToDo's met sample data.
     static func loadSampleToDos() -> [ToDo] {
         let todo1 = ToDo(title: "ToDo One", isComplete: false, dueDate: Date(), notes: "Notes1")
         let todo2 = ToDo(title: "ToDo Two", isComplete: false, dueDate: Date(), notes: "Notes2")

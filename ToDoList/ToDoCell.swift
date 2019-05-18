@@ -8,10 +8,12 @@
 
 import UIKit
 
+// Protocol die de cel terug geeft aan de delegate.
 @objc protocol ToDoCellDelegate: class {
     func checkmarkTapped(sender: ToDoCell)
 }
 
+// Model die een enkele cel in de ToDo Table View representeert.
 class ToDoCell: UITableViewCell {
 
     var delegate: ToDoCellDelegate?
@@ -25,13 +27,10 @@ class ToDoCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }
